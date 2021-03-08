@@ -8,10 +8,8 @@
 
     SubShader
     {
-        Tags{
-            "RenderPipeline"="UniversalRenderPipeline"
-            "RenderType"="Opaque"
-        }
+        Tags{"RenderPipeline"="UniversalRenderPipeline"
+            "RenderType"="Opaque"}
 
         HLSLINCLUDE
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
