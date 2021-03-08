@@ -60,7 +60,7 @@
 
             float4 positionCS:SV_POSITION;
 
-            float2 texcoord:TEXCOORD;
+            float2 texcoordUV:TEXCOORD;
 
             float3 normalWS:TEXCOORD1;
 
@@ -94,7 +94,7 @@
 
                 o.positionCS=TransformObjectToHClip(i.positionOS.xyz);
 
-                o.texcoord=TRANSFORM_TEX(i.texcoord,_MainTex);
+                o.texcoordUV=TRANSFORM_TEX(i.texcoord,_MainTex);
 
                 o.normalWS=TransformObjectToWorldNormal(i.normalOS.xyz);
                 //o.normalWS=TransformObjectToWorldNormal(i.normalOS.xyz,true);
@@ -107,7 +107,7 @@
 
             {
 
-                half4 tex=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,i.texcoord)*_BaseColor;//贴图像素
+                half4 tex=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,i.texcoordUV)*_BaseColor;//贴图像素
 
                 Light mainlight=GetMainLight();//主光信息
 
