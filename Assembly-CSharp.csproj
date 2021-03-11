@@ -99,7 +99,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\URP_Shader\HalfLambert.shader" />
      <None Include="Assets\URP_Shader\MulLight.shader" />
-     <None Include="Assets\URP_Shader\NewUnlitShader.shader" />
+     <None Include="Assets\URP_Shader\PBR.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
  <HintPath>E:/Github/Unity_URP_Shader/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

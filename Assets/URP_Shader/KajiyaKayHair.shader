@@ -12,10 +12,7 @@
     SubShader
     {
         Tags
-        {
-            "RenderPipeline"="UniversalRenderPipeline"
-            "RenderType"="Opaque"
-        }
+        {"RenderPipeline"="UniversalRenderPipeline" "RenderType"="Opaque"}
 
         HLSLINCLUDE
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -64,12 +61,13 @@
             #pragma fragment FRAG
             #pragma shader_feature _FLIP_UV_ON _FLIP_UV_OFF
 
+            //切线偏转，制造W形天使环
             float3 ShiftTangent(float T, float N, float shift)
             {
                 float3 shiftedT = T + shift * N;
                 return normalize(shiftedT);
             }
-
+            //制造天使环高光，参数：切线T,视角方向V，光源方向L，高光指数e
             float StrandSpecular(float3 T, float3 V, float3 L, float exponent)
             {
                 float3 H = normalize(L + V);
@@ -111,7 +109,6 @@
                 t = ShiftTangent(t, i.normalWS, shift);
                 float spec = StrandSpecular(t, i.viewDirWs, LightDir, _Shininess);
                 result += spec;
-
 
                 return result;
             }
