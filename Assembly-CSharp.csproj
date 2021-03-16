@@ -85,9 +85,11 @@
      <None Include="Assets\URP_Shader\AlphaBlend.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\MultiLight.shader" />
+     <None Include="Assets\URP_Shader\VisualNormal.shader" />
      <None Include="Assets\URP_Shader\Ramp.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\URP_Shader\Toon.shader" />
+     <None Include="Assets\URP_Shader\SSS.shader" />
      <None Include="Assets\HongLiu\BasicOutline.shader" />
      <None Include="Assets\URP_Shader\Lambert.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
