@@ -77,10 +77,10 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\HongLiuShader\MultiPass.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\NedGame\PyramidFaces.hlsl" />
+     <None Include="Assets\NedGame\Geomotry\PyramidFaces.hlsl" />
      <None Include="Assets\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\NedGame\NMGGeometryHelpers.hlsl" />
+     <None Include="Assets\NedGame\Geomotry\NMGGeometryHelpers.hlsl" />
      <None Include="Assets\HongLiuShader\VisualNormal.shader" />
      <None Include="Assets\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
      <None Include="Assets\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
@@ -106,7 +106,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\unity-chan!\Unity-chan! Model\Audio\Voice\unity-chan_voice_list.txt" />
      <None Include="Assets\MultiLight.shader" />
-     <None Include="Assets\NedGame\PyramidFaces.shader" />
+     <None Include="Assets\NedGame\Geomotry\PyramidFaces.shader" />
      <None Include="Assets\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
      <None Include="Assets\URPShader\VisualNormal.shader" />
      <None Include="Assets\URPShader\Ramp.shader" />
