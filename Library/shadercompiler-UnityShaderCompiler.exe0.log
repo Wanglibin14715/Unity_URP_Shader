@@ -1,9 +1,11 @@
 Base path: 'E:/Unity Editor/2019.4.8f1/Editor/Data', plugins path 'E:/Unity Editor/2019.4.8f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
+Cmd: preprocessCompute
+  insize=4473 outsize=4475 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=4475 outsize=3468 ok=1
 Cmd: preprocess
-  insize=3571 outsize=2122 ok=1
-Cmd: preprocess
-  insize=3349 outsize=2054 ok=1
+  insize=2279 outsize=984 ok=1
 Cmd: compileSnippet
   api=4 type=0 insize=1027 outsize=1190 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_RGBM_ENCODING ok=1
 Cmd: compileSnippet
@@ -13,16 +15,35 @@ Cmd: compileSnippet
 Cmd: compileSnippet
   api=4 type=1 insize=967 outsize=306 kw=UNITY_PASS_SHADOWCASTER SHADOWS_DEPTH pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_RGBM_ENCODING ok=1
 Cmd: preprocessCompute
-  insize=4473 outsize=4475 ok=1
+  insize=458 outsize=460 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=4475 outsize=3468 ok=1
+  api=4 insize=460 outsize=396 ok=1
 Cmd: preprocessCompute
-  insize=1530 outsize=1532 ok=1
+  insize=421 outsize=420 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=1532 outsize=396 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=1027 outsize=1190 kw=_ADDITIONAL_LIGHTS pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_RGBM_ENCODING ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=1027 outsize=1542 kw=_ADDITIONAL_LIGHTS pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_RGBM_ENCODING ok=1
-
-Quitting shader compiler process
+  api=4 insize=420 outsize=461 ok=1
+Cmd: preprocessCompute
+  insize=438 outsize=437 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at NMGGrassBladeGraphicsHelpers.hlsl(29): undeclared identifier 'GetCameraPositionWS'
+  api=4 insize=437 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=438 outsize=437 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at NMGGrassBladeGraphicsHelpers.hlsl(29): undeclared identifier 'GetCameraPositionWS'
+  api=4 insize=437 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=438 outsize=437 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at NMGGrassBladeGraphicsHelpers.hlsl(29): undeclared identifier 'GetCameraPositionWS'
+  api=4 insize=437 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=438 outsize=437 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at NMGGrassBladeGraphicsHelpers.hlsl(29): undeclared identifier 'GetCameraPositionWS'
+  api=4 insize=437 outsize=0 ok=0
+Cmd: preprocessCompute
+  insize=438 outsize=437 ok=1
+Cmd: compileComputeKernel
+  error: 2 plat 4 at NMGGrassBladeGraphicsHelpers.hlsl(29): undeclared identifier 'GetCameraPositionWS'
+  api=4 insize=437 outsize=0 ok=0

@@ -1,41 +1,21 @@
 // MIT License
-
 // Copyright (c) 2020 NedMakesGames
-
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files(the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions :
-
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-
-// Make sure this file is not included twice
+// 防止该脚本被include两次
 #ifndef NMG_GRAPHICS_HELPERS_INCLUDED
 #define NMG_GRAPHICS_HELPERS_INCLUDED
 
-// Returns the view direction in world space
+// 返回视角方向，世界坐标下
 float3 GetViewDirectionFromPosition(float3 positionWS) {
     return normalize(GetCameraPositionWS() - positionWS);
 }
 
-// If this is the shadow caster pass, we also need this variable, which URP sets
+//如果是投影的pass, 我们需要灯光方向参数
 #ifdef SHADOW_CASTER_PASS
 float3 _LightDirection;
 #endif
 
-// Calculates the position in clip space, taking into account various strategies
-// to improve shadow quality in the shadow caster pass
+// 计算裁剪空间的position用额外的参数, taking into account various strategies
+// 提高shadow caster pass的质量
 float4 CalculatePositionCSWithShadowCasterLogic(float3 positionWS, float3 normalWS) {
     float4 positionCS;
 
@@ -58,6 +38,7 @@ float4 CalculatePositionCSWithShadowCasterLogic(float3 positionWS, float3 normal
 }
 
 // Calculates the shadow texture coordinate for lighting calculations
+//计算 阴影贴图的坐标 用来计算光照
 float4 CalculateShadowCoord(float3 positionWS, float4 positionCS) {
     // Calculate the shadow coordinate depending on the type of shadows currently in use
 #if SHADOWS_SCREEN
