@@ -1,0 +1,122 @@
+//#kernel 告诉电脑去编译哪个函数; 可以有多个kernels
+#pragma kernel Main
+
+// Import some helper functions
+#include "NMGGrassBladeComputeHelpers.hlsl"
+
+//源网格的顶点位置in物体空间ObjectSpace
+struct SourceVertex {
+    float3 positionOS; // Position in object spaceS
+};
+//源网格的Buffer
+// Source buffers, arranged as a vertex buffer and index buffer
+StructuredBuffer<SourceVertex> _SourceVertices;
+StructuredBuffer<int> _SourceTriangles;
+
+//生成网格的顶点
+struct DrawVertex {
+    float3 positionWS; // The position in world space
+    float height; //草的高度
+};
+//生成网格的三角面
+struct DrawTriangle {
+    float3 lightingNormalWS; // A normal, in world space, to use in the lighting algorithm
+    DrawVertex vertices[3]; // The three points on the triangle
+};
+// A buffer containing the generated mesh
+AppendStructuredBuffer<DrawTriangle> _DrawTriangles;
+
+// The indirect draw call args, as described in the renderer script
+struct IndirectArgs {
+    uint numVerticesPerInstance;
+    uint numInstances;
+    uint startVertexIndex;
+    uint startInstanceIndex;
+};
+// The kernel will count the number of vertices, so this must be RW enabled
+RWStructuredBuffer<IndirectArgs> _IndirectArgsBuffer;
+
+// Variables set by the renderer
+int _NumSourceTriangles; // The number of triangles on the source mesh
+// Local to world matrix
+float4x4 _LocalToWorld;
+
+void GetCenterAndBasis(SourceVertex a, SourceVertex b, SourceVertex c, out float3 positionWS, out float3 normalWS, out float3x3 tsToWs) 
+{
+    // We need to figure out the center of the triangle, since that is where the blade will sprout
+    // Convert each triangle point to world space
+    float3 positionA_WS = mul(_LocalToWorld, float4(a.positionOS, 1)).xyz;
+    float3 positionB_WS = mul(_LocalToWorld, float4(b.positionOS, 1)).xyz;
+    float3 positionC_WS = mul(_LocalToWorld, float4(c.positionOS, 1)).xyz;
+    // Then get the center point
+    positionWS = GetTriangleCenter(positionA_WS, positionB_WS, positionC_WS);
+    // and the normal vector and TS -> WS transformation matrix
+    GetTriangleNormalAndTSToWSMatrix(positionA_WS, positionB_WS, positionC_WS, normalWS, tsToWs);
+}
+
+// This function calculates values for the output point
+DrawVertex SetupBladePoint(float3 anchorWS, float3x3 tsToWs, float2 uv) 
+{
+    // Calculate the offset in tangent space based on the UV and width/height
+    float3 offsetTS = float3(uv.x - 0.5f, 0, uv.y); // Offset X by 1/2, since we want 0.5 to be on the center
+    // Calculate the offset in world space using the rotation matrix
+    float3 offsetWS = mul(tsToWs, offsetTS);
+
+    float3 positionWS = anchorWS + offsetWS;
+
+    DrawVertex output = (DrawVertex)0;
+    output.positionWS = positionWS;
+    output.height = uv.y;
+    return output;
+}
+
+// The main kernel
+[numthreads(128, 1, 1)]
+void Main(uint3 id : SV_DispatchThreadID) {
+
+    //如果每个三角面都被处理了就返回 Return if every triangle has been processed
+    if ((int)id.x >= _NumSourceTriangles) {
+        return;
+    }
+
+    //计算起始的三角面的index Calculate the start index of this triangle in the index buffer
+    int triStart = id.x * 3;
+    // Get the triangle center, normal vector, and tangent-to-world space transformation matrix
+    float3 positionWS, normalWS;
+    float3x3 tsToWs;
+    //计算三角中心位置法线矢量和切线空间到世界空间的变化矩阵
+    GetCenterAndBasis(
+        _SourceVertices[_SourceTriangles[triStart]],
+        _SourceVertices[_SourceTriangles[triStart + 1]],
+        _SourceVertices[_SourceTriangles[triStart + 2]],
+        positionWS, normalWS, tsToWs);
+
+    //三个draw顶点的数列 Create an array to hold blade points
+    DrawVertex vertices[3];
+
+    // Blade points will be arranged from the bottom up in the array
+    // with the point with the minimum u-coordinate in a pair appearing first
+
+    // Append the first vertex
+    vertices[0] = SetupBladePoint(positionWS, tsToWs, float2(0, 0));
+
+    // Append the second vertex
+    vertices[1] = SetupBladePoint(positionWS, tsToWs, float2(1, 0));
+
+    // Append the tip vertex
+    vertices[2] = SetupBladePoint(positionWS, tsToWs, float2(0.5, 1));
+
+    //添加draw三角面到缓冲区 Add triangles from the array into the draw buffer
+    // We can construct a triangle from every three adjacent points in the array
+    DrawTriangle tri = (DrawTriangle)0;
+    tri.lightingNormalWS = normalWS;
+    tri.vertices[0] = vertices[0];
+    tri.vertices[1] = vertices[1];
+    tri.vertices[2] = vertices[2];
+    _DrawTriangles.Append(tri);
+
+    // InterlockedAdd(a, b) adds b to a and stores the value in a. It is thread-safe
+    // This call counts the number of vertices, storing it in the indirect arguments
+    // This tells the renderer how many vertices are in the mesh in DrawProcedural
+    InterlockedAdd(_IndirectArgsBuffer[0].numVerticesPerInstance, 3);
+}
