@@ -1,5 +1,5 @@
 ﻿// 这个shader给mesh填充一个固定的颜色
-Shader "Example/URPUnlitShaderBasic"
+Shader "URP/URPUnlitShaderBasicExampleWithNotion"
 {
     // shader的属性，这个例子里面是空的，就代表没有对外暴露的属性
     Properties
