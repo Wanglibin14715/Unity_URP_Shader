@@ -75,7 +75,6 @@
      <Compile Include="Assets\NedGame\ComputeSpurs\ProceduralPyramidRenderer.cs" />
      <Compile Include="Assets\NedGame\Grass\ProceduralGrassRenderer.cs" />
      <None Include="Assets\Asset\unity-chan!\Unity-chan! Model\Art\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
-     <None Include="Assets\aaaTestText.txt" />
      <None Include="Assets\URPShader\BlinnPhong.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\HongLiuShader\MultiPass.shader" />
